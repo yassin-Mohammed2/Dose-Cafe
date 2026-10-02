@@ -20,7 +20,7 @@ const I18N = {
     sizeLabel: { S: "Small", M: "Medium", L: "Large" }, toggle: "عربي", toggleLabel: "Switch to Arabic"
   },
   ar: {
-    title: "Dose Cafe | قهوة مختصة",
+    title: "Dose Cafe | دوز كافيه",
     nav_about: "عنّا", nav_menu: "المنيو", nav_visit: "زورنا",
     hero_title: "جرعتك اليومية،<br>بمقاس مظبوط.",
     hero_text: "تصفّح المنيو، ثم أخبر الويتر بما تود طلبه، وسنوصله إلى طاولتك.",
