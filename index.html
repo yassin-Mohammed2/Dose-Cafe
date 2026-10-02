@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dose Cafe | Specialty Coffee</title>
+<meta name="description" content="Dose Cafe: specialty coffee, slow brews and fresh bakes.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="top" id="top">
+  <a class="logo" href="#top">Dose<span>Cafe</span></a>
+  <nav>
+    <a href="#about">About</a>
+    <a href="#menu">Menu</a>
+    <a href="#visit">Visit</a>
+    <a class="nav-cta" href="#menu">Order</a>
+  </nav>
+</header>
+
+<section class="hero beans-dark">
+  <div class="hero-text">
+    <h1>Your daily dose,<br>measured right.</h1>
+    <p>Single-origin espresso, slow brews and fresh bakes. Pick your size, we handle the grams.</p>
+    <div class="hero-actions">
+      <a class="btn" href="#menu">See the menu</a>
+      <a class="btn ghost" href="#visit">Find us</a>
+    </div>
+  </div>
+  <svg class="hero-art" viewBox="0 0 400 400" aria-hidden="true">
+    <defs>
+      <radialGradient id="bg1" cx="35%" cy="30%" r="80%">
+        <stop offset="0" stop-color="#8a5a37"/><stop offset=".6" stop-color="#4a2a17"/><stop offset="1" stop-color="#26130a"/>
+      </radialGradient>
+    </defs>
+    <g transform="translate(130 150) rotate(-28)">
+      <ellipse rx="95" ry="140" fill="url(#bg1)"/>
+      <path d="M0 -138 C-40 -50 40 50 0 138" stroke="#1a0c06" stroke-width="9" fill="none" stroke-linecap="round"/>
+    </g>
+    <g transform="translate(275 235) rotate(24) scale(.75)">
+      <ellipse rx="95" ry="140" fill="url(#bg1)"/>
+      <path d="M0 -138 C-40 -50 40 50 0 138" stroke="#1a0c06" stroke-width="10" fill="none" stroke-linecap="round"/>
+    </g>
+    <g transform="translate(250 85) rotate(70) scale(.5)">
+      <ellipse rx="95" ry="140" fill="url(#bg1)"/>
+      <path d="M0 -138 C-40 -50 40 50 0 138" stroke="#1a0c06" stroke-width="12" fill="none" stroke-linecap="round"/>
+    </g>
+  </svg>
+</section>
+
+<section id="about" class="about">
+  <h2>Coffee, taken seriously</h2>
+  <div class="features">
+    <article>
+      <h3>Single-origin beans</h3>
+      <p>Sourced from small farms and rotated every season, so the cup is never the same twice.</p>
+    </article>
+    <article>
+      <h3>Roasted weekly</h3>
+      <p>Small batches, roasted in the week you drink them. Fresh beans, clean flavour.</p>
+    </article>
+    <article>
+      <h3>Made to your dose</h3>
+      <p>Choose small, medium or large and the shot is dialled in for that size.</p>
+    </article>
+  </div>
+</section>
+
+<section id="menu" class="menu beans-light">
+  <h2>Menu</h2>
+  <div class="tabs" id="tabs" role="tablist"></div>
+  <div class="grid" id="grid"></div>
+</section>
+
+<section id="visit" class="visit beans-dark">
+  <h2>Visit us</h2>
+  <div class="visit-grid">
+    <div><h3>Address</h3><p>12 Example Street, Cairo</p></div>
+    <div><h3>Hours</h3><p>Daily, 8:00 AM to 12:00 AM</p></div>
+    <div><h3>Contact</h3><p>+20 100 000 0000<br>hello@dosecafe.example</p></div>
+  </div>
+</section>
+
+<footer>© 2026 Dose Cafe. All rights reserved.</footer>
+
+<div class="order" id="order" hidden>
+  <span id="orderText"></span>
+  <button class="btn small" id="clearBtn" type="button">Clear order</button>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
