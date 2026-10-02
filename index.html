@@ -7,7 +7,7 @@
 <meta name="description" content="Dose Cafe: specialty coffee, slow brews and fresh bakes.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&family=Fraunces:opsz,wght@9..144,600;9..144,800&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -15,20 +15,20 @@
 <header class="top" id="top">
   <a class="logo" href="#top">Dose<span>Cafe</span></a>
   <nav>
-    <a href="#about">About</a>
-    <a href="#menu">Menu</a>
-    <a href="#visit">Visit</a>
-    <a class="nav-cta" href="#menu">Order</a>
+    <a href="#about" data-i18n="nav_about">About</a>
+    <a href="#menu" data-i18n="nav_menu">Menu</a>
+    <a href="#visit" data-i18n="nav_visit">Visit</a>
+    <button class="lang-btn" id="langBtn" type="button">عربي</button>
   </nav>
 </header>
 
 <section class="hero beans-dark">
   <div class="hero-text">
-    <h1>Your daily dose,<br>measured right.</h1>
-    <p>Single-origin espresso, slow brews and fresh bakes. Pick your size, we handle the grams.</p>
+    <h1 data-i18n="hero_title">Your daily dose,<br>measured right.</h1>
+    <p data-i18n="hero_text">Browse the menu, then tell your waiter what you would like. We will bring it to your table.</p>
     <div class="hero-actions">
-      <a class="btn" href="#menu">See the menu</a>
-      <a class="btn ghost" href="#visit">Find us</a>
+      <a class="btn" href="#menu" data-i18n="hero_btn1">View the menu</a>
+      <a class="btn ghost" href="#visit" data-i18n="hero_btn2">Find us</a>
     </div>
   </div>
   <svg class="hero-art" viewBox="0 0 400 400" aria-hidden="true">
@@ -53,44 +53,42 @@
 </section>
 
 <section id="about" class="about">
-  <h2>Coffee, taken seriously</h2>
+  <h2 data-i18n="about_title">Coffee, taken seriously</h2>
   <div class="features">
     <article>
-      <h3>Single-origin beans</h3>
-      <p>Sourced from small farms and rotated every season, so the cup is never the same twice.</p>
+      <h3 data-i18n="f1_t">Single-origin beans</h3>
+      <p data-i18n="f1_d">Sourced from small farms.</p>
     </article>
     <article>
-      <h3>Roasted weekly</h3>
-      <p>Small batches, roasted in the week you drink them. Fresh beans, clean flavour.</p>
+      <h3 data-i18n="f2_t">Roasted weekly</h3>
+      <p data-i18n="f2_d">Small batches.</p>
     </article>
     <article>
-      <h3>Made to your dose</h3>
-      <p>Choose small, medium or large and the shot is dialled in for that size.</p>
+      <h3 data-i18n="f3_t">Made to your dose</h3>
+      <p data-i18n="f3_d">Choose your size.</p>
     </article>
   </div>
 </section>
 
 <section id="menu" class="menu beans-light">
-  <h2>Menu</h2>
+  <h2 data-i18n="menu_title">Menu</h2>
+  <p class="note" data-i18n="menu_note">Ready to order? Just call your waiter.</p>
   <div class="tabs" id="tabs" role="tablist"></div>
   <div class="grid" id="grid"></div>
 </section>
 
 <section id="visit" class="visit beans-dark">
-  <h2>Visit us</h2>
+  <h2 data-i18n="visit_title">Visit us</h2>
   <div class="visit-grid">
-    <div><h3>Address</h3><p>12 Example Street, Cairo</p></div>
-    <div><h3>Hours</h3><p>Daily, 8:00 AM to 12:00 AM</p></div>
-    <div><h3>Contact</h3><p>+20 100 000 0000<br>hello@dosecafe.example</p></div>
+    <div><h3 data-i18n="addr_t">Address</h3><p data-i18n="addr_v">Al Gezira Towers, Sadat Academy St., Corniche El Maadi, Cairo</p>
+      <p><a class="map-link" href="https://maps.app.goo.gl/iFPZDR7LhdyDKD9A6" target="_blank" rel="noopener" data-i18n="map_t">Open in Google Maps</a></p></div>
+    <div><h3 data-i18n="hours_t">Hours</h3><p data-i18n="hours_v">Daily, 8:00 AM to 2:00 AM</p></div>
+    <div><h3 data-i18n="contact_t">Phone</h3><p><a href="tel:+201108828719" dir="ltr">0110 882 8719</a></p></div>
   </div>
 </section>
 
-<footer>© 2026 Dose Cafe. All rights reserved.</footer>
+<footer data-i18n="footer">© 2026 Dose Cafe. All rights reserved.</footer>
 
-<div class="order" id="order" hidden>
-  <span id="orderText"></span>
-  <button class="btn small" id="clearBtn" type="button">Clear order</button>
-</div>
 
 <script src="script.js"></script>
 </body>
