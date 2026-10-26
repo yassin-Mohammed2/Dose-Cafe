@@ -1,7 +1,7 @@
 // ---------- Texts (English / Arabic) ----------
 const I18N = {
   en: {
-    title: "Dose Cafe | Specialty Coffee",
+    title: "Dose Café | Your Bold Dose",
     nav_about: "About", nav_menu: "Menu", nav_visit: "Visit",
     hero_title: "Your daily dose,<br>measured right.",
     hero_text: "Browse the menu, then tell your waiter what you would like. We will bring it to your table.",
@@ -9,18 +9,17 @@ const I18N = {
     about_title: "Coffee, taken seriously",
     f1_t: "Single-origin beans", f1_d: "Sourced from small farms and rotated every season, so the cup is never the same twice.",
     f2_t: "Roasted weekly", f2_d: "Small batches, roasted in the week you drink them. Fresh beans, clean flavour.",
-    f3_t: "Made to your dose", f3_d: "Choose small, medium or large and the shot is dialled in for that size.",
+    f3_t: "Made to your dose", f3_d: "Single or double, you choose how strong your coffee goes.",
     menu_title: "Menu", menu_note: "Ready to order? Just call your waiter.",
     visit_title: "Visit us",
     addr_t: "Address", addr_v: "Al Gezira Towers, Sadat Academy St., Corniche El Maadi, Cairo", map_t: "Open in Google Maps",
     hours_t: "Hours", hours_v: "Daily, 8:00 AM to 2:00 AM",
     contact_t: "Phone",
-    footer: "© 2026 Dose Cafe. All rights reserved.",
-    currency: "EGP", sizes: { S: "S", M: "M", L: "L" },
-    sizeLabel: { S: "Small", M: "Medium", L: "Large" }, toggle: "عربي", toggleLabel: "Switch to Arabic"
+    footer: "© 2026 Dose Café. All rights reserved.",
+    currency: "EGP", toggle: "عربي", toggleLabel: "Switch to Arabic"
   },
   ar: {
-    title: "Dose Cafe | دوز كافيه",
+    title: "Dose Café | دوز كافية",
     nav_about: "عنّا", nav_menu: "المنيو", nav_visit: "زورنا",
     hero_title: "جرعتك اليومية،<br>بمقاس مظبوط.",
     hero_text: "تصفّح المنيو، ثم أخبر الويتر بما تود طلبه، وسنوصله إلى طاولتك.",
@@ -28,49 +27,120 @@ const I18N = {
     about_title: "القهوة كما يجب أن تكون",
     f1_t: "حبوب من مصدر واحد", f1_d: "من مزارع صغيرة، ونغيّرها كل موسم، فلا يتكرر الكوب مرتين.",
     f2_t: "تحميص أسبوعي", f2_d: "دفعات صغيرة تُحمَّص في نفس أسبوع شربك لها. حبوب طازجة ونكهة نقية.",
-    f3_t: "بجرعتك أنت", f3_d: "اختر صغير أو وسط أو كبير، ونضبط الشوت على حسب الحجم.",
+    f3_t: "بجرعتك أنت", f3_d: "سنجل أو دبل، اختار قوة قهوتك بنفسك.",
     menu_title: "المنيو", menu_note: "جاهز للطلب؟ ناد الويتر فقط.",
     visit_title: "زورنا",
     addr_t: "العنوان", addr_v: "أبراج الجزيرة، شارع أكاديمية السادات، كورنيش المعادي، القاهرة", map_t: "افتح في خرائط جوجل",
     hours_t: "المواعيد", hours_v: "يوميًا من 8:00 ص إلى 2:00 ص",
     contact_t: "التليفون",
-    footer: "© 2026 Dose Cafe. جميع الحقوق محفوظة.",
-    currency: "ج.م", sizes: { S: "ص", M: "و", L: "ك" },
-    sizeLabel: { S: "صغير", M: "وسط", L: "كبير" }, toggle: "EN", toggleLabel: "التحويل إلى الإنجليزية"
+    footer: "© 2026 Dose Café. جميع الحقوق محفوظة.",
+    currency: "ج.م", toggle: "EN", toggleLabel: "التحويل إلى الإنجليزية"
   }
 };
 
-// ---------- Placeholder menu ----------
-// Replace names, descriptions and prices when the real menu is ready.
-// name / desc are [English, Arabic]. "price" is for size S; M and L add SIZE_EXTRA.
-// fixed: true = single size (no S/M/L buttons).
-const SIZE_EXTRA = { S: 0, M: 10, L: 20 };
+// ---------- Menu ----------
+// i(English, Arabic, price, [ingredients EN, ingredients AR])  -> one menu item
+// sub(English, Arabic)                                          -> small heading inside a section
+const i = (en, ar, price, note) => ({ name: [en, ar], price, note });
+const sub = (en, ar) => ({ sub: [en, ar] });
 
 const MENU = [
-  { cat: ["Hot coffee", "قهوة ساخنة"], items: [
-    { name: ["Espresso", "إسبريسو"],        desc: ["Double shot, dense and sweet with a caramel finish.", "شوت مزدوج، كثيف وحلو بنهاية كراميل."], price: 55 },
-    { name: ["Americano", "أمريكانو"],      desc: ["Espresso lengthened with hot water.", "إسبريسو مخفف بالماء الساخن."], price: 60 },
-    { name: ["Flat White", "فلات وايت"],    desc: ["Two shots, silky steamed milk.", "شوتان مع حليب مبخّر ناعم."], price: 80 },
-    { name: ["Cappuccino", "كابتشينو"],     desc: ["Equal parts espresso, milk and foam.", "أجزاء متساوية من الإسبريسو والحليب والرغوة."], price: 80 },
-    { name: ["Spanish Latte", "سبانش لاتيه"], desc: ["Espresso, milk and a touch of condensed milk.", "إسبريسو وحليب مع لمسة من اللبن المكثف."], price: 95 }
+  { cat: ["Coffee", "القهوة"],
+    banner: {
+      title: ["The Strong Dose", "جرعة Dose القوية"],
+      text: ["High-caffeine coffee for strong coffee lovers. Single or double, choose your dose.",
+             "بن بكافيين عالٍ لعشاق القهوة القوية. إسبريسو سنجل أو دبل... اختار جرعتك."]
+    },
+    items: [
+      i("Single Espresso", "إسبريسو سنجل", 45),
+      i("Double Espresso", "إسبريسو دبل", 60),
+      i("Americano", "أمريكانو", 60),
+      i("Single Turkish Coffee", "قهوة تركي سنجل", 45),
+      i("Double Turkish Coffee", "قهوة تركي دبل", 60),
+      i("French Coffee", "قهوة فرنساوي", 60),
+      i("Hazelnut Coffee", "قهوة بندق", 60)
   ]},
-  { cat: ["Cold coffee", "قهوة باردة"], items: [
-    { name: ["Iced Latte", "آيس لاتيه"],    desc: ["Espresso over cold milk and ice.", "إسبريسو على حليب بارد وثلج."], price: 85 },
-    { name: ["Cold Brew", "كولد برو"],      desc: ["Steeped for 18 hours, smooth and low in acidity.", "منقوع لمدة 18 ساعة، ناعم وقليل الحموضة."], price: 90 },
-    { name: ["Iced Mocha", "آيس موكا"],     desc: ["Espresso, chocolate and milk over ice.", "إسبريسو وشوكولاتة وحليب على الثلج."], price: 100 },
-    { name: ["Affogato", "أفوجاتو"],        desc: ["Vanilla ice cream drowned in a hot espresso shot.", "آيس كريم فانيليا مع شوت إسبريسو ساخن."], price: 95 }
+  { cat: ["Warm Drinks & Tea", "مشروبات دافئة وشاي"], items: [
+      i("Latte", "لاتيه", 75),
+      i("Cappuccino", "كابتشينو", 75),
+      i("Flat White", "فلات وايت", 80),
+      i("Hot Mocha", "هوت موكا", 90),
+      i("Hot White Mocha", "هوت وايت موكا", 90),
+      i("Spanish Latte", "سبانيش لاتيه", 90),
+      i("Sahlab", "سحلب", 70),
+      i("Hot Cider", "هوت سيدر", 65),
+      sub("Tea", "الشاي"),
+      i("Black Tea", "شاي أسود", 30),
+      i("Green Tea", "شاي أخضر", 30)
   ]},
-  { cat: ["Not coffee", "مشروبات أخرى"], items: [
-    { name: ["Matcha Latte", "ماتشا لاتيه"], desc: ["Ceremonial-grade matcha with steamed milk.", "ماتشا فاخرة مع حليب مبخّر."], price: 95 },
-    { name: ["Hot Chocolate", "هوت شوكليت"], desc: ["Dark chocolate melted into milk.", "شوكولاتة داكنة ذائبة في الحليب."], price: 80 },
-    { name: ["Fresh Lemon Mint", "ليمون بالنعناع"], desc: ["Squeezed to order, lightly sweet.", "عصير طازج، حلاوته خفيفة."], price: 60 },
-    { name: ["Karkade", "كركديه"],          desc: ["Hibiscus, served hot or iced.", "يُقدَّم ساخنًا أو باردًا."], price: 50 }
+  { cat: ["Iced Coffee", "قهوة باردة"], items: [
+      i("Iced Americano", "آيس أمريكانو", 70),
+      i("Iced Latte", "آيس لاتيه", 85),
+      i("Iced Spanish Latte", "آيس سبانيش لاتيه", 105),
+      i("Iced Mocha", "آيس موكا", 105),
+      i("Iced White Mocha", "آيس وايت موكا", 105)
   ]},
-  { cat: ["Bakery", "مخبوزات"], items: [
-    { name: ["Butter Croissant", "كرواسون بالزبدة"], desc: ["Baked every morning.", "يُخبز كل صباح."], price: 55, fixed: true },
-    { name: ["Pistachio Cookie", "كوكيز بالفستق"],   desc: ["Soft centre, crisp edge.", "قلب طري وحواف مقرمشة."], price: 50, fixed: true },
-    { name: ["Basque Cheesecake", "باسك تشيز كيك"],  desc: ["Burnt top, creamy inside.", "وجه محروق وقلب كريمي."], price: 120, fixed: true },
-    { name: ["Brownie", "براوني"],           desc: ["Dense and fudgy.", "كثيف ومشبع بالشوكولاتة."], price: 65, fixed: true }
+  { cat: ["Frappés", "فرابيه"], items: [
+      i("Classic Frappé", "فرابيه كلاسيك", 80),
+      i("Mocha Frappé", "فرابيه موكا", 85),
+      i("White Mocha Frappé", "فرابيه وايت موكا", 85),
+      i("Spanish Frappé", "فرابيه سبانيش", 85),
+      i("Oreo Frappé", "فرابيه أوريو", 95),
+      i("Lotus Frappé", "فرابيه لوتس", 95)
+  ]},
+  { cat: ["Milkshakes", "ميلك شيك"], items: [
+      i("Vanilla Milkshake", "ميلك شيك فانيليا", 100),
+      i("Chocolate Milkshake", "ميلك شيك شوكولاتة", 100),
+      i("Mango Milkshake", "ميلك شيك مانجو", 100),
+      i("Blueberry Milkshake", "ميلك شيك بلوبيري", 100),
+      i("Strawberry Milkshake", "ميلك شيك فراولة", 100),
+      i("Caramel Milkshake", "ميلك شيك كراميل", 100),
+      i("Oreo Milkshake", "ميلك شيك أوريو", 110),
+      i("Lotus Milkshake", "ميلك شيك لوتس", 110)
+  ]},
+  { cat: ["Fresh Juices", "عصائر فريش"], items: [
+      i("Mint Lemonade", "ليمون بالنعناع", 65),
+      i("Orange Juice", "برتقال", 65),
+      i("Mango Juice", "مانجو", 80),
+      i("Strawberry Juice", "فراولة", 75),
+      i("Guava Juice", "جوافة", 75),
+      i("Mixed Berry Juice", "ميكس بيري", 75),
+      i("Kiwi Juice", "كيوي", 80)
+  ]},
+  { cat: ["Smoothies", "سموذي"], items: [
+      i("Mint Lemon Smoothie", "سموذي ليمون بالنعناع", 65),
+      i("Mango or Strawberry Smoothie", "سموذي مانجو أو فراولة", 75),
+      i("Watermelon Smoothie", "سموذي بطيخ", 70),
+      i("Blueberry Smoothie", "سموذي بلوبيري", 70),
+      i("Passion Fruit Smoothie", "سموذي باشون فروت", 70),
+      i("Kiwi Smoothie", "سموذي كيوي", 75)
+  ]},
+  { cat: ["Soft Drinks & Water", "سوفت ومياه"], items: [
+      i("Pepsi", "بيبسي", 30),
+      i("Coca-Cola", "كوكاكولا", 30),
+      i("7UP", "سفن أب", 30),
+      i("Sprite", "سبرايت", 30),
+      i("Mineral Water", "مياه معدنية", 15)
+  ]},
+  { cat: ["Mojitos & Boba", "موهيتو وبوبا"], items: [
+      i("Classic Mojito", "موهيتو كلاسيك", 85),
+      i("Blueberry Mojito", "موهيتو بلوبيري", 100),
+      i("Passion Fruit Mojito", "موهيتو باشون فروت", 100),
+      i("Strawberry Mojito", "موهيتو فراولة", 100),
+      i("Sunrise Mojito", "موهيتو صن رايز", 100),
+      i("Blueberry Boba Mojito", "موهيتو بوبا بلوبيري", 120),
+      i("Passion Fruit Boba Mojito", "موهيتو بوبا باشون فروت", 120)
+  ]},
+  { cat: ["Cocktails & Iced Tea", "كوكتيلات وآيس تي"], items: [
+      i("Florida", "فلوريدا", 100, ["Mango · Strawberry · Guava", "مانجو · فراولة · جوافة"]),
+      i("Tropical", "تروبيكال", 100, ["Banana · Pineapple · Orange · Passion Fruit", "موز · أناناس · برتقال · باشون فروت"]),
+      i("Dose Cocktail", "كوكتيل دوز", 110, ["Mango · Strawberry · Banana · Cream", "مانجو · فراولة · موز · كريمة"]),
+      i("Mango Passion", "مانجو باشون", 120, ["Mango · Kiwi · Passion Fruit", "مانجو · كيوي · باشون فروت"]),
+      sub("Iced Tea", "آيس تي"),
+      i("Passion Fruit Iced Tea", "آيس تي باشون فروت", 65),
+      i("Strawberry Iced Tea", "آيس تي فراولة", 65),
+      i("Peach Iced Tea", "آيس تي خوخ", 65),
+      i("Mixed Iced Tea", "آيس تي ميكس", 75, ["Passion Fruit · Strawberry · Peach", "باشون فروت · فراولة · خوخ"])
   ]}
 ];
 
@@ -112,55 +182,47 @@ const L = () => (lang === "ar" ? 1 : 0);
 
 function renderTabs() {
   tabsEl.innerHTML = "";
-  MENU.forEach((group, i) => {
+  MENU.forEach((group, idx) => {
     const b = document.createElement("button");
     b.className = "tab";
     b.type = "button";
     b.textContent = group.cat[L()];
     b.setAttribute("role", "tab");
-    b.setAttribute("aria-selected", i === current);
-    b.addEventListener("click", () => { current = i; renderTabs(); renderItems(); });
+    b.setAttribute("aria-selected", idx === current);
+    b.addEventListener("click", () => { current = idx; renderTabs(); renderItems(); });
     tabsEl.appendChild(b);
   });
 }
 
 function renderItems() {
   const t = I18N[lang];
+  const group = MENU[current];
   gridEl.innerHTML = "";
-  MENU[current].items.forEach(item => {
-    let size = "S";
+
+  if (group.banner) {
+    const b = document.createElement("div");
+    b.className = "banner";
+    b.innerHTML = `<strong>${group.banner.title[L()]}</strong><span>${group.banner.text[L()]}</span>`;
+    gridEl.appendChild(b);
+  }
+
+  group.items.forEach(it => {
+    if (it.sub) {
+      const h = document.createElement("h3");
+      h.className = "sub";
+      h.textContent = it.sub[L()];
+      gridEl.appendChild(h);
+      return;
+    }
     const card = document.createElement("article");
     card.className = "item";
     card.innerHTML = `
-      <h3>${item.name[L()]}</h3>
-      <p>${item.desc[L()]}</p>
-      <div class="row">
-        <span class="price"></span>
-        <div class="sizes"></div>
-      </div>`;
-    const priceEl = card.querySelector(".price");
-    const sizesEl = card.querySelector(".sizes");
-    const updatePrice = () => {
-      priceEl.textContent = (item.price + (item.fixed ? 0 : SIZE_EXTRA[size])) + " " + t.currency;
-    };
-
-    if (!item.fixed) {
-      Object.keys(SIZE_EXTRA).forEach(s => {
-        const sb = document.createElement("button");
-        sb.className = "size";
-        sb.type = "button";
-        sb.textContent = t.sizes[s];
-        sb.setAttribute("aria-label", t.sizeLabel[s]);
-        sb.setAttribute("aria-pressed", s === size);
-        sb.addEventListener("click", () => {
-          size = s;
-          sizesEl.querySelectorAll(".size").forEach(x => x.setAttribute("aria-pressed", x === sb));
-          updatePrice();
-        });
-        sizesEl.appendChild(sb);
-      });
-    }
-    updatePrice();
+      <div class="info">
+        <h3 dir="auto">${it.name[L()]}</h3>
+        <span class="alt" dir="auto">${it.name[1 - L()]}</span>
+        ${it.note ? `<span class="ing" dir="auto">${it.note[L()]}</span>` : ""}
+      </div>
+      <span class="price">${it.price}<small>${t.currency}</small></span>`;
     gridEl.appendChild(card);
   });
 }
